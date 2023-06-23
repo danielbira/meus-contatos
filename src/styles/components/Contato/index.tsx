@@ -2,17 +2,15 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { remover, editar } from '../../../store/reducers/contato'
 import * as S from './styles'
-import { type } from 'os'
-import * as enums from '../../../utils/enums/Contato'
 
 import ContatoClass from '../../../models/Contato'
-import { getEffectiveTypeParameterDeclarations } from 'typescript'
+
+import { Botao, BotaoSalvar } from '../..'
 
 type Props = ContatoClass
 
 const Contato = ({
   nome,
-  status,
   prioridade,
   telefone: telefoneOriginal,
   email: emailOriginal,
@@ -47,9 +45,6 @@ const Contato = ({
       <S.Tag parametro="prioridade" prioridade={prioridade}>
         {prioridade}
       </S.Tag>
-      <S.Tag parametro="status" status={status}>
-        {status}
-      </S.Tag>
       <S.Descricao>Telefone: </S.Descricao>
       <S.Numero
         disabled={!estaEditando}
@@ -65,14 +60,13 @@ const Contato = ({
       <S.BarraAcoes>
         {estaEditando ? (
           <>
-            <S.BotaoSalvar
+            <BotaoSalvar
               onClick={() => {
                 dispatch(
                   editar({
                     telefone,
                     email,
                     nome,
-                    status,
                     prioridade,
                     id
                   })
@@ -81,14 +75,14 @@ const Contato = ({
               }}
             >
               Salvar
-            </S.BotaoSalvar>
+            </BotaoSalvar>
             <S.BotaoCancelarRemover onClick={cancelarEdicao}>
               Cancelar
             </S.BotaoCancelarRemover>
           </>
         ) : (
           <>
-            <S.Botao onClick={() => setEstaEditanto(true)}>Editar</S.Botao>
+            <Botao onClick={() => setEstaEditanto(true)}>Editar</Botao>
             <S.BotaoCancelarRemover onClick={() => dispatch(remover(id))}>
               Remover
             </S.BotaoCancelarRemover>

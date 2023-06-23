@@ -2,21 +2,20 @@ import styled from 'styled-components'
 import variaveis from '../../variaveis'
 
 import * as enums from '../../../utils/enums/Contato'
+import { Botao } from '../..'
 
 type TagProps = {
   prioridade?: enums.Prioridade
-  status?: enums.Status
-  parametro: 'status' | 'prioridade'
+
+  parametro: 'prioridade'
 }
 
 function retonarCorDeFundo(props: TagProps): string {
   if (props.parametro === 'prioridade') {
     if (props.prioridade === enums.Prioridade.IMPORTANTE)
       return variaveis.vermelho
-    if (props.prioridade === enums.Prioridade.NORMAL) return variaveis.amarelo2
-  } else {
-    if (props.status === enums.Status.FAMILIA) return variaveis.amarelo
-    if (props.status === enums.Status.OUTROS) return variaveis.azul
+    if (props.prioridade === enums.Prioridade.FAMILIA) return variaveis.amarelo2
+    if (props.prioridade === enums.Prioridade.OUTROS) return variaveis.azul
   }
   return '#A1C2F1'
 }
@@ -87,21 +86,7 @@ export const BarraAcoes = styled.div`
   padding-top: 16px;
 `
 
-export const Botao = styled.button`
-  font-size: 12px;
-  font-weight: bold;
-  color: #fff;
-  padding: 8px 12px;
-  border: none;
-  cursor: pointer;
-  background-color: #2f3640;
-  border-radius: 8px;
-  margin-right: 8px;
-`
-
-export const BotaoSalvar = styled(Botao)`
-  background-color: ${variaveis.verde};
-`
 export const BotaoCancelarRemover = styled(Botao)`
   background-color: ${variaveis.vermelho};
 `
+export { Botao }
